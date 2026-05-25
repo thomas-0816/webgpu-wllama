@@ -18,6 +18,9 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/ggml-org/GLM-OCR-GGUF/resolve/main/GLM-OCR-Q8_0.gguf
     wget https://huggingface.co/ggml-org/GLM-OCR-GGUF/resolve/main/mmproj-GLM-OCR-Q8_0.gguf
 
+    wget https://huggingface.co/ggml-org/Qwen3-ASR-1.7B-GGUF/resolve/main/Qwen3-ASR-1.7B-Q8_0.gguf
+    wget https://huggingface.co/ggml-org/Qwen3-ASR-1.7B-GGUF/resolve/main/mmproj-Qwen3-ASR-1.7B-Q8_0.gguf
+
 Point your local webserver to the project root.
 
 Launch your web browser:
@@ -31,6 +34,7 @@ Launch your web browser:
 - http://localhost/wllama_bonsai.html
 - http://localhost/wllama_translate.html
 - http://localhost/wllama_ocr.html
+- http://localhost/wllama_asr.html
 
 ## Links
 
@@ -38,3 +42,4 @@ Launch your web browser:
 - https://huggingface.co/prism-ml/Bonsai-8B-gguf
 - https://huggingface.co/tencent/HY-MT1.5-1.8B-GGUF
 - https://huggingface.co/zai-org/GLM-OCR
+- https://huggingface.co/Qwen/Qwen3-ASR-1.7B

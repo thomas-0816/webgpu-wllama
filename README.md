@@ -30,8 +30,8 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
     wget https://huggingface.co/ggml-org/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_0.gguf
 
-    wget https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-UD-Q4_K_XL.gguf
-    wget https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/mmproj-BF16.gguf
+    wget https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-UD-Q4_K_XL.gguf
+    wget https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-BF16.gguf
 
     wget https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF/resolve/main/Qwen3-30B-A3B-UD-Q4_K_XL.gguf
 
@@ -51,6 +51,7 @@ Launch your web browser:
 - http://localhost/wllama_bonsai_4b.html
 - http://localhost/wllama_bonsai_8b.html
 - http://localhost/wllama_translate.html
+- http://localhost/wllama_image.html
 - http://localhost/wllama_ocr.html
 - http://localhost/wllama_ocr2.html
 - http://localhost/wllama_asr.html
@@ -71,6 +72,6 @@ Launch your web browser:
 - https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe-GGUF
 - https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF
 - https://huggingface.co/Qwen/Qwen3.5-0.8B
-- https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF
+- https://huggingface.co/unsloth/Qwen3.5-2B-GGUF
 - https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF
 - https://huggingface.co/LiquidAI/LFM2-24B-A2B-GGUF

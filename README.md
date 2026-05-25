@@ -21,6 +21,9 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/ggml-org/Qwen3-ASR-1.7B-GGUF/resolve/main/Qwen3-ASR-1.7B-Q8_0.gguf
     wget https://huggingface.co/ggml-org/Qwen3-ASR-1.7B-GGUF/resolve/main/mmproj-Qwen3-ASR-1.7B-Q8_0.gguf
 
+    wget https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe-GGUF/resolve/main/nomic-embed-text-v2-moe.Q4_K_M.gguf
+    wget https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF/resolve/main/sts-multilingual-mpnet-base-v2.Q4_K_M.gguf
+
 Point your local webserver to the project root.
 
 Launch your web browser:
@@ -35,6 +38,8 @@ Launch your web browser:
 - http://localhost/wllama_translate.html
 - http://localhost/wllama_ocr.html
 - http://localhost/wllama_asr.html
+- http://localhost/wllama_embeddings.html
+- http://localhost/wllama_embeddings2.html
 
 ## Links
 
@@ -43,3 +48,5 @@ Launch your web browser:
 - https://huggingface.co/tencent/HY-MT1.5-1.8B-GGUF
 - https://huggingface.co/zai-org/GLM-OCR
 - https://huggingface.co/Qwen/Qwen3-ASR-1.7B
+- https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe-GGUF
+- https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF

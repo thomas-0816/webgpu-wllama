@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:,">
+    <title>wllama demo</title>
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl(new URL("./models/nomic-embed-text-v2-moe.Q4_K_M.gguf", window.location).href, {
+          embeddings: true, n_gpu_layers: 9999,
+          n_ctx: 512, n_batch: 512, n_ubatch: 512, pooling_type: 'LLAMA_POOLING_TYPE_MEAN',
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = 'loaded.';
+        const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"] });
+        output.innerText = JSON.stringify(result.data[0].embedding, null, 4);
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>
+<!--
+Cache:
+await wllama.cacheManager.clear();
+const files = await wllama.cacheManager.list();
+files.forEach((file) => console.log(`Cache ${file.metadata.originalURL} ${(file.metadata.originalSize / 1073741824).toFixed(1)} GB`));
+-->

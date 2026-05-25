@@ -56,6 +56,7 @@ Launch your web browser:
 - https://huggingface.co/prism-ml/Bonsai-8B-gguf
 - https://huggingface.co/tencent/HY-MT1.5-1.8B-GGUF
 - https://huggingface.co/zai-org/GLM-OCR
+- https://huggingface.co/lightonai/LightOnOCR-2-1B
 - https://huggingface.co/Qwen/Qwen3-ASR-1.7B
 - https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe-GGUF
 - https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF

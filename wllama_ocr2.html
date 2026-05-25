@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:,">
+    <title>wllama LightOnOCR-2</title>
+    <style>pre { white-space: pre-wrap; width: 50vw; }</style>
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl({
+          url: new URL("./models/LightOnOCR-2-1B-Q4_K_M.gguf", window.location).href,
+          mmprojUrl: new URL("./models/mmproj-LightOnOCR-2-1B-Q8_0.gguf", window.location).href
+        }, {
+          n_ctx: 8192, n_gpu_layers: 9999, reasoning: false,
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = 'loaded.';
+        const response = await wllama.createChatCompletion({ // currently crashing
+          messages: [{role: "user", content: [
+            { type: 'image', data: await fetch('./demo_ocr.jpeg').then(r => r.arrayBuffer()) }]}],
+          temperature: 0.2, top_p: 0.9, top_k: 0, max_tokens: 1024, stream: true
+        });
+        for await (const chunk of response) {
+          output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
+        }
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>

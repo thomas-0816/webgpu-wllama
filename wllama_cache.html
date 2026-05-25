@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:,">
+    <title>wllama cache</title>
+  </head>
+  <body>
+    <h2>Cache</h2>
+    <pre id="output"></pre>
+    <button type="button" id="clear">Clear Cache</button>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      const wllama = new Wllama({ default: './node_modules/@wllama/wllama/esm/wasm/wllama.wasm' });
+      const output = document.getElementById("output");
+      const clear = document.getElementById('clear');
+      (async () => {
+        const files = await wllama.cacheManager.list();
+        files.forEach((file) => output.innerText += `${file.metadata.originalURL} ${(file.metadata.originalSize / 1073741824).toFixed(1)} GB\n`);
+      })()
+      clear.addEventListener('click', async () => {
+        await wllama.cacheManager.clear();
+        output.innerText = '';
+      });
+    </script>
+  </body>
+</html>

@@ -47,19 +47,7 @@ Launch your web browser:
 
 ## URLs
 
-- http://localhost/wllama_text.html
-- http://localhost/wllama_bonsai_4b.html
-- http://localhost/wllama_bonsai_8b.html
-- http://localhost/wllama_translate.html
-- http://localhost/wllama_image.html
-- http://localhost/wllama_ocr.html
-- http://localhost/wllama_ocr2.html
-- http://localhost/wllama_asr.html
-- http://localhost/wllama_embeddings.html
-- http://localhost/wllama_embeddings2.html
-- http://localhost/wllama_qwen35_0-8b.html
-- http://localhost/wllama_qwen3_30b_a3b.html
-- http://localhost/wllama_lfm2_24b_a2b.html
+- http://localhost/index.html
 
 ## Links
 

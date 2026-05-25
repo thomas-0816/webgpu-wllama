@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="data:,">
+    <title>wllama demo</title>
+    <style>pre { white-space: pre-wrap; width: 50vw; }</style>
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      const wllama = new Wllama({default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm"});
+      const progress = document.getElementById("progress");
+      const output = document.getElementById("output");
+      await wllama.loadModelFromUrl(new URL("./models/Bonsai-8B-Q1_0.gguf", window.location).href, {
+        n_ctx: 2048, n_gpu_layers: 9999, n_threads: 1, reasoning: false,
+        progressCallback: ({loaded, total}) => progress.innerText = Math.round((loaded / total) * 100) + "% "
+      });
+      const response = await wllama.createChatCompletion({
+        messages: [{role: "user", content: "When was Beethoven born?"}],
+        temperature: 0.5, min_p: 0.0, top_p: 0.9, top_k: 20, penalty_repeat: 1.0,
+        max_tokens: 1024, stream: true
+      });
+      for await (const chunk of response) {
+        output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
+      }
+      await wllama.exit();
+    </script>
+  </body>
+</html>
+<!--
+Cache:
+await wllama.cacheManager.clear();
+const files = await wllama.cacheManager.list();
+files.forEach((file) => console.log(`Cache ${file.metadata.originalURL} ${(file.metadata.originalSize / 1073741824).toFixed(1)} GB`));
+-->

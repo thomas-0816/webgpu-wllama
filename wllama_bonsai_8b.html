@@ -20,7 +20,7 @@
           n_ctx: 2048, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
-        progress.innerText = 'loaded.';
+        progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
           messages: [{ role: "user", content: "Was ist die minimale Mehrfach-Bedingungsabdeckung?" }],
           temperature: 0.5, min_p: 0.0, top_p: 0.9, top_k: 20, penalty_repeat: 1.0,
@@ -30,7 +30,7 @@
         let startTime = null;
         for await (const chunk of response) {
           startTime ??= performance.now();
-          progress.innerText = (numTokens++ / (performance.now() - startTime) * 1000).toFixed(2) + ' t/s';
+          progress.innerText = (numTokens++ / (performance.now() - startTime) * 1000).toFixed(2) + " t/s";
           reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
           output.innerText += chunk.choices[0].delta.content ?? "";
         }

@@ -21,11 +21,11 @@
           n_ctx: 8192, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
-        progress.innerText = 'loaded.';
+        progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
           messages: [{role: "user", content: [
-            { type: 'image', data: await fetch('./demo_ocr.jpeg').then(r => r.arrayBuffer()) },
-            { type: 'text', text: 'Text Recognition:' }]}],
+            { type: "image", data: await fetch("./demo_ocr.jpeg").then(r => r.arrayBuffer()) },
+            { type: "text", text: "Text Recognition:" }]}],
           max_tokens: 1024, stream: true
         });
         for await (const chunk of response) {

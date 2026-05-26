@@ -10,16 +10,16 @@
     <button type="button" id="clear">Clear Cache</button>
     <script type="module">
       import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
-      const wllama = new Wllama({ default: './node_modules/@wllama/wllama/esm/wasm/wllama.wasm' });
+      const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
       const output = document.getElementById("output");
-      const clear = document.getElementById('clear');
+      const clear = document.getElementById("clear");
       (async () => {
         const files = await wllama.cacheManager.list();
         files.forEach((file) => output.innerText += `${file.metadata.originalURL} ${(file.metadata.originalSize / 1073741824).toFixed(1)} GB\n`);
       })()
-      clear.addEventListener('click', async () => {
+      clear.addEventListener("click", async () => {
         await wllama.cacheManager.clear();
-        output.innerText = '';
+        output.innerText = "";
       });
     </script>
   </body>

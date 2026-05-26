@@ -31,7 +31,10 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/ggml-org/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q4_0.gguf
 
     wget https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-UD-Q4_K_XL.gguf
-    wget https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-BF16.gguf
+    wget -o Qwen3.5-2B-mmproj-BF16.gguf https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-BF16.gguf
+
+    wget https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-UD-Q4_K_XL.gguf
+    wget -o gemma-4-E2B-mmproj-BF16.gguf https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/mmproj-BF16.gguf
 
     wget https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF/resolve/main/Qwen3-30B-A3B-UD-Q4_K_XL.gguf
 
@@ -62,5 +65,6 @@ Launch your web browser:
 - https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF
 - https://huggingface.co/Qwen/Qwen3.5-0.8B
 - https://huggingface.co/unsloth/Qwen3.5-2B-GGUF
+- https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF
 - https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF
 - https://huggingface.co/LiquidAI/LFM2-24B-A2B-GGUF

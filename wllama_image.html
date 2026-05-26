@@ -22,9 +22,9 @@
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";
-        const response = await wllama.createChatCompletion({ // encoding image slice is currently slow
+        const response = await wllama.createChatCompletion({
           messages: [{role: "user", content: [
-            { type: "image", data: await fetch("./demo_128.jpeg").then(r => r.arrayBuffer()) },
+            { type: "image", data: await fetch("./demo_256.jpeg").then(r => r.arrayBuffer()) },
             { type: "text", text: "Describe this image in one sentence." }
           ]}],
           temperature: 0.7, min_p: 0.0, top_p: 0.8, top_k: 20, penalty_repeat: 1.0,

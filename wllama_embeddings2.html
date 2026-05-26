@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="data:,">
     <title>wllama Embeddings sts-multilingual-mpnet-base-v2</title>
+    <link rel="icon" href="data:,">
   </head>
   <body>
     <pre id="progress"></pre>
@@ -15,7 +15,7 @@
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl(new URL("./models/sts-multilingual-mpnet-base-v2.Q4_K_M.gguf", window.location).href, {
           embeddings: true, n_gpu_layers: 9999,
-          n_ctx: 512, n_batch: 512, n_ubatch: 512, pooling_type: "LLAMA_POOLING_TYPE_MEAN",
+          n_ctx: 512, n_batch: 512, n_ubatch: 512, pooling_type: "LLAMA_POOLING_TYPE_MEAN", // TODO use new types
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";

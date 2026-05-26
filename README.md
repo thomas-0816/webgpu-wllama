@@ -6,8 +6,8 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
 ## Setup
 
-    bun install
-    # or npm install
+    bun install --ignore-scripts
+    # or npm install --ignore-scripts
 
     cd models
 

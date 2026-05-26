@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama Reranking</title>
+    <link rel="icon" href="data:,">
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl(new URL("./models/Qwen3-Reranker-4B-Q4_K_M.gguf", window.location).href, {
+          embeddings: true, pooling_type: 'rank', n_gpu_layers: 9999,
+          n_ctx: 1024, n_batch: 1024, n_ubatch: 1024,
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = "loaded.";
+        const documents = [
+          "Berlin is the biggest city of Germany.",
+          "Paris is the biggest city of France.",
+          "Lyon is not the capital of France.",
+          "Marseille is a big city of France"
+        ];
+        const result = await wllama.createRerank({ query: "capital of France", documents }); // TODO: requires new release
+        output.innerText = JSON.stringify(result, null, 4);
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>

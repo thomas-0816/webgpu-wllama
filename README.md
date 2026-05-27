@@ -6,7 +6,7 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
 ## Setup
 
-    bun install --ignore-scripts
+    deno install --node-modules-dir=manual --node-modules-linker=hoisted --prod --skip-types
     # or npm install --ignore-scripts
 
     cd models
@@ -45,9 +45,8 @@ Point your local webserver to the project root.
 
 Launch your web browser:
 
-- chromium --enable-unsafe-webgpu --enable-features=Vulkan
-- firefox # set dom.webgpu.enabled to true in about:config
-- firefox # set javascript.options.wasm_js_promise_integration to true in about:config
+- chromium --enable-unsafe-webgpu --enable-features=Vulkan --force-high-performance-gpu
+- firefox # set dom.webgpu.enabled and javascript.options.wasm_js_promise_integration to true in about:config
 
 ## URLs
 

@@ -11,6 +11,7 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
     cd models
 
+    wget https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B-Q1_0.gguf
     wget https://huggingface.co/prism-ml/Bonsai-4B-gguf/resolve/main/Bonsai-4B-Q1_0.gguf
     wget https://huggingface.co/prism-ml/Bonsai-8B-gguf/resolve/main/Bonsai-8B-Q1_0.gguf
 
@@ -55,6 +56,7 @@ Launch your web browser:
 ## Links
 
 - https://github.com/ngxson/wllama
+- https://huggingface.co/prism-ml/Bonsai-1.7B-gguf
 - https://huggingface.co/prism-ml/Bonsai-4B-gguf
 - https://huggingface.co/prism-ml/Bonsai-8B-gguf
 - https://huggingface.co/tencent/HY-MT1.5-1.8B-GGUF

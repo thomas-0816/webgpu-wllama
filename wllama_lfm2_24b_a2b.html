@@ -24,7 +24,7 @@
         const response = await wllama.createChatCompletion({
           messages: [{ role: "user", content: "Was ist die minimale Mehrfach-Bedingungsabdeckung?" }],
           temperature: 0.1, top_k: 50, penalty_repeat: 1.05,
-          max_tokens: 1024, stream: true,
+          max_tokens: 1024, stream: true
         });
         let numTokens = 0;
         let startTime = null;

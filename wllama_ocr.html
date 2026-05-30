@@ -30,7 +30,7 @@
           max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {
-          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pt/s " +
             chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
         }

@@ -24,9 +24,11 @@
             `Translate the following segment into German, without additional explanation.
               When was Beethoven born?`}],
           temperature: 0.7, min_p: 0.0, top_p: 0.6, top_k: 20, penalty_repeat: 1.05,
-          max_tokens: 4096, stream: true
+          max_tokens: 4096, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {
+          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+            chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
         }
         await wllama.exit();

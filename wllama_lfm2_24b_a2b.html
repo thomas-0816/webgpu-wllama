@@ -24,13 +24,11 @@
         const response = await wllama.createChatCompletion({
           messages: [{ role: "user", content: "Was ist die minimale Mehrfach-Bedingungsabdeckung?" }],
           temperature: 0.1, top_k: 50, penalty_repeat: 1.05,
-          max_tokens: 1024, stream: true
+          max_tokens: 1024, stream: true, timings_per_token: true
         });
-        let numTokens = 0;
-        let startTime = null;
         for await (const chunk of response) {
-          startTime ??= performance.now();
-          progress.innerText = (numTokens++ / (performance.now() - startTime) * 1000).toFixed(2) + " t/s";
+          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+            chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
           output.innerText += chunk.choices[0].delta.content ?? "";
         }

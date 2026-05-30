@@ -19,13 +19,15 @@
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";
-        const result = await wllama.createRerank({ query: "capital of France", documents: [
+        const query = "capital of France";
+        const documents = [
           "Berlin is the biggest city of Germany.",
           "Paris is the biggest city of France.",
           "Lyon is not the capital of France.",
           "Marseille is a big city of France"
-        ]}); // TODO: requires new release
-        output.innerText = JSON.stringify(result, null, 4);
+        ];
+        const result = await wllama.createRerank({ query: query, documents: documents});
+        output.innerText = JSON.stringify([query, documents], null, 4) + "\n" + JSON.stringify(result, null, 4);
         await wllama.exit();
       })();
     </script>

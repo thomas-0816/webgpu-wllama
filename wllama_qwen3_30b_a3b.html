@@ -27,8 +27,7 @@
           max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {
-          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
-            chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
+          progress.innerText = chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
           output.innerText += chunk.choices[0].delta.content ?? "";
         }

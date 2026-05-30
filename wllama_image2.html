@@ -28,9 +28,12 @@
             { type: "image", data: await fetch("./demo_128.jpeg").then(r => r.arrayBuffer()) },
             { type: "text", text: "Describe this image in one sentence." }
           ]}],
-          max_tokens: 1024, stream: true, temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64
+          temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64,
+          max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {
+          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+            chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
         }
         await wllama.exit();

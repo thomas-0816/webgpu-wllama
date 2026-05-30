@@ -3,7 +3,7 @@
   <head>
     <title>wllama LightOnOCR-2</title>
     <link rel="icon" href="data:,">
-    <style>pre { white-space: pre-wrap; width: 50vw; }</style>
+    <style>pre { white-space: pre-wrap; width: 50vw; } img { width: 250px; }</style>
   </head>
   <body>
     <img src="./demo_ocr.jpeg">
@@ -26,9 +26,12 @@
         const response = await wllama.createChatCompletion({ // currently crashing
           messages: [{role: "user", content: [
             { type: "image", data: await fetch("./demo_ocr.jpeg").then(r => r.arrayBuffer()) }]}],
-          temperature: 0.2, top_p: 0.9, top_k: 0, max_tokens: 1024, stream: true
+          temperature: 0.2, top_p: 0.9, top_k: 0,
+          max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {
+          progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+            chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
           output.innerText += chunk.choices[0].delta.reasoning_content ?? chunk.choices[0].delta.content ?? "";
         }
         await wllama.exit();

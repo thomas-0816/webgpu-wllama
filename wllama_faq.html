@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama Bonsai 4B</title>
+    <link rel="icon" href="data:,">
+    <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; } #input { width: 50vw; }</style>
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <form id="form">
+      <input type="text" id="input" autofocus>
+    </form>
+    <pre id="reasoning"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      import { prompt } from "./faq.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const reasoning = document.getElementById("reasoning");
+        const input = document.getElementById("input");
+        const output = document.getElementById("output");
+        const form = document.getElementById("form");
+        await wllama.loadModelFromUrl(new URL("./models/gemma-4-E2B-it-UD-Q4_K_XL.gguf", window.location).href, {
+          n_ctx: 4096, n_gpu_layers: 9999, reasoning: false,
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = "loaded.";
+        form.onsubmit = async (event) => {
+          event.preventDefault();
+          reasoning.innerText = '';
+          output.innerText = '';
+          const response = await wllama.createChatCompletion({
+            messages: [{ role: "user", content: prompt(input.value) }],
+            temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64,
+            max_tokens: 1024, stream: true, timings_per_token: true
+          });
+          for await (const chunk of response) {
+            progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
+              chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
+            reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
+            output.innerText += chunk.choices[0].delta.content ?? "";
+          }
+        };
+      })();
+    </script>
+  </body>
+</html>

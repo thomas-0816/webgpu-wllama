@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Bonsai 4B</title>
+    <title>wllama Gemma4 E2B</title>
     <link rel="icon" href="data:,">
     <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; } #input { width: 50vw; }</style>
   </head>
@@ -22,7 +22,7 @@
         const input = document.getElementById("input");
         const output = document.getElementById("output");
         const form = document.getElementById("form");
-        await wllama.loadModelFromUrl(new URL("./models/gemma-4-E2B-it-UD-Q4_K_XL.gguf", window.location).href, {
+        await wllama.loadModelFromUrl(new URL("./models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf", window.location).href, {
           n_ctx: 4096, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });

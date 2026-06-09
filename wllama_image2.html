@@ -16,7 +16,7 @@
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({
-          url: new URL("./models/gemma-4-E2B-it-UD-Q4_K_XL.gguf", window.location).href,
+          url: new URL("./models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf", window.location).href,
           mmprojUrl: new URL("./models/gemma-4-E2B-mmproj-BF16.gguf", window.location).href
         }, {
           n_ctx: 131072, n_gpu_layers: 9999, reasoning: false,

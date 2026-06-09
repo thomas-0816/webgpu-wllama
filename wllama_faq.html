@@ -14,7 +14,7 @@
     <pre id="output"></pre>
     <script type="module">
       import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
-      import { prompt } from "./faq.js";
+      import { prompt } from "./wllama_faq.js";
       (async () => {
         const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");

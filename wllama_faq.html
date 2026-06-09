@@ -23,10 +23,16 @@
         const output = document.getElementById("output");
         const form = document.getElementById("form");
         await wllama.loadModelFromUrl(new URL("./models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf", window.location).href, {
-          n_ctx: 4096, n_gpu_layers: 9999, reasoning: false,
+          n_ctx: 4096, n_gpu_layers: 9999, reasoning: false, warmup: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
-        progress.innerText = "loaded.";
+        progress.innerText = "warming up ...";
+        const warmup = await wllama.createChatCompletion({
+          messages: [{ role: "user", content: prompt('') }],
+          temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64,
+          max_tokens: 1024, stream: false, timings_per_token: true
+        });
+        progress.innerText = warmup.timings?.prompt_per_second.toFixed(2) + " pp-t/s";
         form.onsubmit = async (event) => {
           event.preventDefault();
           reasoning.innerText = '';
@@ -37,8 +43,7 @@
             max_tokens: 1024, stream: true, timings_per_token: true
           });
           for await (const chunk of response) {
-            progress.innerText = chunk.timings?.prompt_per_second.toFixed(2) + " pp-t/s " +
-              chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
+            progress.innerText = chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
             reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
             output.innerText += chunk.choices[0].delta.content ?? "";
           }

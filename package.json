@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "@wllama/wllama": "^3.4.1"
+    "@wllama/wllama": "^3.5.0"
   }
 }

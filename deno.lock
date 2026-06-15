@@ -1,17 +1,17 @@
 {
   "version": "5",
   "specifiers": {
-    "npm:@wllama/wllama@^3.4.1": "3.4.1"
+    "npm:@wllama/wllama@^3.5.0": "3.5.0"
   },
   "npm": {
-    "@wllama/wllama@3.4.1": {
-      "integrity": "sha512-izq3CLVsIIpFoi4lI5/yvpM1tbzTBnDU8WuVi6I1q1oQgImSXSGF8eZo8WwDNBgbmhVJpcPGyw8cg24jKk0sbg=="
+    "@wllama/wllama@3.5.0": {
+      "integrity": "sha512-9pxsyjiVYBq6Y2rPZLZwyKAjt9U86rsHGDIejN9HqrXfTTWE/Hl59v7Vm4R1eBLPRiRGo0LdCDVeGss+vzb13Q=="
     }
   },
   "workspace": {
     "packageJson": {
       "dependencies": [
-        "npm:@wllama/wllama@^3.4.1"
+        "npm:@wllama/wllama@^3.5.0"
       ]
     }
   }

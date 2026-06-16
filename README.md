@@ -47,6 +47,12 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
     wget https://huggingface.co/LiquidAI/LFM2-24B-A2B-GGUF/resolve/main/LFM2-24B-A2B-Q4_K_M.gguf
 
+## nginx
+
+    add_header Cross-Origin-Embedder-Policy "require-corp";
+    add_header Cross-Origin-Opener-Policy "same-origin";
+    add_header Cache-Control "no-cache, no-store, must-revalidate";
+
 Point your local webserver to the project root.
 
 Launch your web browser:

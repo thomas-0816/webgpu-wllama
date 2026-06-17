@@ -13,7 +13,7 @@
         const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
-        await wllama.loadModelFromUrl(new URL("./models/sts-multilingual-mpnet-base-v2.Q4_K_M.gguf", window.location).href, {
+        await wllama.loadModelFromUrl("./models/sts-multilingual-mpnet-base-v2.Q4_K_M.gguf", {
           embeddings: true, n_gpu_layers: 9999, pooling_type: "mean",
           n_ctx: 512, n_batch: 512, n_ubatch: 512,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"

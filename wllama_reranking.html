@@ -13,7 +13,7 @@
         const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
-        await wllama.loadModelFromUrl(new URL("./models/Qwen3-Reranker-4B-Q4_K_M.gguf", window.location).href, {
+        await wllama.loadModelFromUrl("./models/Qwen3-Reranker-4B-Q4_K_M.gguf", {
           embeddings: true, pooling_type: 'rank', n_gpu_layers: 9999,
           n_ctx: 1024, n_batch: 1024, n_ubatch: 1024,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"

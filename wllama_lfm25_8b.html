@@ -16,7 +16,7 @@
         const progress = document.getElementById("progress");
         const reasoning = document.getElementById("reasoning");
         const output = document.getElementById("output");
-        await wllama.loadModelFromUrl(new URL("./models/LFM2.5-8B-A1B-Q4_K_M.gguf", window.location).href, {
+        await wllama.loadModelFromUrl("./models/LFM2.5-8B-A1B-Q4_K_M.gguf", {
           n_ctx: 2048, n_gpu_layers: 9999, reasoning_budget_tokens: 0,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });

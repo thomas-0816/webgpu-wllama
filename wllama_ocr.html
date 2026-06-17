@@ -16,8 +16,7 @@
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({
-          url: new URL("./models/GLM-OCR-Q8_0.gguf", window.location).href,
-          mmprojUrl: new URL("./models/mmproj-GLM-OCR-Q8_0.gguf", window.location).href
+          url: "./models/GLM-OCR-Q8_0.gguf", mmprojUrl: "./models/mmproj-GLM-OCR-Q8_0.gguf"
         }, {
           n_ctx: 8192, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"

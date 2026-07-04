@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama worker</title>
+    <link rel="icon" href="data:,">
+    <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; } #prompt { width: 75vw; }</style>
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <form id="form">
+      <input type="text" id="prompt" value="Write a quick sort algorithm in php 8, only the code." autofocus>
+      <button type="submit" id="submit">Go!</button>
+      <button type="button" id="stop">Stop</button>
+    </form>
+    <pre id="reasoning"></pre>
+    <pre id="content"></pre>
+    <script type="module">
+      (async () => {
+        const progress = document.getElementById("progress");
+        const reasoning = document.getElementById("reasoning");
+        const content = document.getElementById("content");
+        const form = document.getElementById('form');
+        const stop = document.getElementById('stop');
+        const worker = new Worker('./wllama_worker.js', { type: 'module' });
+        worker.onmessage = (event) => {
+            if (event.data[0] === 'progress') {
+                progress.innerText = event.data[1];
+            }
+            if (event.data[0] === 'reasoning') {
+                reasoning.innerText += event.data[1];
+            }
+            if (event.data[0] === 'content') {
+                content.innerText += event.data[1];
+            }
+        }
+        form.onsubmit = async (event) => {
+            event.preventDefault();
+            content.innerText = '';
+            reasoning.innerText = '';
+            worker.postMessage(document.getElementById('prompt').value);
+        };
+        stop.onclick = () => {
+            worker?.postMessage(null);
+        };
+      })();
+    </script>
+  </body>
+</html>

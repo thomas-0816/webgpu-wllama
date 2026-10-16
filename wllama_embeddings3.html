@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama Embeddings embeddinggemma-2</title>
+    <link rel="icon" href="data:,">
+  </head>
+  <body>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./wllama/esm/index.min.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl("./models/embeddinggemma-2-BF16.gguf", {
+          embeddings: true, n_gpu_layers: 9999, pooling_type: "mean",
+          n_ctx: 2048, n_batch: 2048, n_ubatch: 2048,
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = "loaded.";
+        const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"] });
+        output.innerText = JSON.stringify(result.data[0].embedding, null, 4);
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>

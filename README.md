@@ -6,9 +6,13 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
 ## Setup
 
-    deno install --node-modules-dir=manual --node-modules-linker=hoisted --prod --skip-types
-    # or npm install --ignore-scripts
-
+    git clone --depth=1 --branch=master --recurse-submodules --shallow-submodules https://github.com/ngxson/wllama.git
+    cd wllama
+    npm ci
+    npm run build:wasm
+    npm run build:tsup
+    build:minified
+    mkdir models
     cd models
 
     wget https://huggingface.co/prism-ml/Bonsai-1.7B-gguf/resolve/main/Bonsai-1.7B-Q1_0.gguf

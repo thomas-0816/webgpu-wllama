@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <title>wllama Qwen3 30B A3B</title>
-    <link rel="icon" href="data:,">
     <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; }</style>
   </head>
   <body>
@@ -22,7 +21,7 @@
         });
         progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
-          messages: [{ role: "user", content: "Was ist die minimale Mehrfach-Bedingungsabdeckung?" }],
+          messages: [{ role: "user", content: "What is the minimal multiple condition coverage?" }],
           temperature: 0.7, min_p: 0.0, top_p: 0.8, top_k: 20,
           max_tokens: 1024, stream: true, timings_per_token: true
         });

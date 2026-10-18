@@ -6,12 +6,8 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
 ## Setup
 
-    git clone --depth=1 --branch=master --recurse-submodules --shallow-submodules https://github.com/ngxson/wllama.git
-    cd wllama
-    npm ci
-    npm run build:wasm
-    npm run build:tsup
-    build:minified
+    npm init
+    npm install @wllama/wllama
     mkdir models
     cd models
 
@@ -46,7 +42,7 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf
     wget -O gemma-4-E4B-mmproj-BF16.gguf https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF/resolve/main/mmproj-BF16.gguf
 
-    wget https://huggingface.co/CodeFault/Mellum2-12B-A2.5B-Thinking-GGUF/resolve/main/Mellum2-12B-A2.5B-Thinking-Q4_K_M.gguf
+    wget https://huggingface.co/JetBrains/Mellum2.1-12B-A2.5B-Thinking-GGUF/resolve/main/Mellum2.1-12B-A2.5B-Thinking-Q4_K_M.gguf
 
     wget https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF/resolve/main/Qwen3-30B-A3B-UD-Q4_K_XL.gguf
 

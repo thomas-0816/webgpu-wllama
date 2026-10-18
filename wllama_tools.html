@@ -26,7 +26,7 @@
             type: "function", function: {
               name: "get_weather", description: "Get current weather for a given city.",
               parameters: {type: "object", properties: {city: {type: "string", description: "City name"}}}}}],
-          max_tokens: 1024, temperature: 0.5, min_p: 0.0, top_p: 0.95, top_k: 20, penalty_repeat: 1.0, tool_choice: "required",
+          max_tokens: 1024, temperature: 0.5, min_p: 0.0, top_p: 0.95, top_k: 20, repeat_penalty: 1.0, tool_choice: "required",
         });
         output.innerText += response.choices[0].message.content;
         const choice = response.choices[0];

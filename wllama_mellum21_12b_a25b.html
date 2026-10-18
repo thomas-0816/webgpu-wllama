@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama LFM2 24B A2B</title>
+    <title>wllama mellum</title>
     <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; }</style>
   </head>
   <body>
+    <h2>JetBrains Mellum 2.1 12B A2.5B Thinking Q4_K_M (7 GB)</h2>
+    <div>Prompt: What is the minimal multiple condition coverage?</div>
     <pre id="progress"></pre>
     <pre id="reasoning"></pre>
     <pre id="output"></pre>
@@ -21,7 +23,7 @@
         });
         progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
-          messages: [{ role: "user", content: "What is the minimal multiple condition coverage?" }],
+          messages: [{ role: "user", content: "Write a quick sort algorithm in JavaScript, only the code." }],
           temperature: 0.6, top_p: 0.95, top_k: 20,
           max_tokens: 1024, stream: true, timings_per_token: true
         });

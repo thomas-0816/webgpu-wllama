@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama LightOnOCR-2</title>
-    <link rel="icon" href="data:,">
+    <title>wllama ocr</title>
     <style>pre { white-space: pre-wrap; width: 50vw; } img { width: 250px; }</style>
   </head>
   <body>
+    <h2>LightOnOCR-2 1B Q4_K_M (0.4 GB)</h2>
     <img src="./demo_ocr.jpeg">
     <pre id="progress"></pre>
     <pre id="output"></pre>
@@ -18,7 +18,7 @@
         await wllama.loadModelFromUrl({
           url: "./models/LightOnOCR-2-1B-Q4_K_M.gguf", mmprojUrl: "./models/mmproj-LightOnOCR-2-1B-Q8_0.gguf"
         }, {
-          n_ctx: 8192, n_gpu_layers: 9999, reasoning: false,
+          n_ctx: 65536, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";

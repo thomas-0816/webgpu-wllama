@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Tool Calling</title>
-    <link rel="icon" href="data:,">
+    <title>wllama tool calling</title>
     <style>pre { white-space: pre-wrap; width: 50vw; }</style>
   </head>
   <body>
+    <h2>Alibaba Qwen 3.5 0.8B Q4_0 (0.5 GB)</h2>
+    <div>Prompt: What is the weather in New York and Berlin? Return text, no formatting, use tools.</div><br/>
+    <div>function: {
+        name: "get_weather", description: "Get current weather for a given city.",
+        parameters: {type: "object", properties: {city: {type: "string", description: "City name"}}</div>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
@@ -33,8 +37,10 @@
         if (choice.finish_reason === "tool_calls") {
           messages.push(choice.message);
           choice.message.tool_calls.forEach((toolCall) => {
-            const result = { temperature_celsius: Math.round(Math.random() * 10) };
+            const temperature = Math.round(Math.random() * 10);
+            const result = { temperature_celsius: temperature };
             messages.push({role: "tool", tool_call_id: toolCall.id, content: JSON.stringify(result)});
+            console.log(toolCall.function.arguments, 'Temperature: ' + temperature);
           });
           progress.innerText = JSON.stringify(messages.slice(-2));
           const final = await wllama.createChatCompletion({ messages, max_tokens: 1024 });

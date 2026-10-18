@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Qwen3-ASR</title>
-    <link rel="icon" href="data:,">
+    <title>wllama asr</title>
     <style>pre { white-space: pre-wrap; width: 50vw; }</style>
   </head>
   <body>
+    <h2>Alibaba Qwen3 ASR 1.7B Q8_0 (2 GB)</h2>
+    <audio controls src="./demo.mp3"></audio>
+    <div>Prompt: Transcribe the audio:</div>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
-      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      import { Wllama } from "./wllama/esm/index.min.js";
       (async () => {
-        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" });
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({
           url: "./models/Qwen3-ASR-1.7B-Q8_0.gguf", mmprojUrl: "./models/mmproj-Qwen3-ASR-1.7B-Q8_0.gguf"
         }, {
-          n_ctx: 131072, n_gpu_layers: 9999, reasoning: false,
+          n_ctx: 65536, n_gpu_layers: 9999, reasoning: false,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
           messages: [{role: "user", content: [
-            { type: "audio", data: await fetch("./demo.wav").then(r => r.arrayBuffer()) },
+            { type: "audio", data: await fetch("./demo.mp3").then(r => r.arrayBuffer()) },
             { type: "text", text: "Transcribe the audio:" }
           ]}],
           max_tokens: 1024, stream: true

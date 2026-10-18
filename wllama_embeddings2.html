@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Embeddings sts-multilingual-mpnet-base-v2</title>
-    <link rel="icon" href="data:,">
+    <title>wllama embeddings</title>
+    <style>pre { white-space: collapse; word-break: break-all; }</style>
   </head>
   <body>
+    <h2>sts multilingual mpnet base v2 Q4_K_M (0.2 GB)</h2>
+    <div>Prompt: When was Beethoven born?</div>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
@@ -20,7 +22,7 @@
         });
         progress.innerText = "loaded.";
         const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"] });
-        output.innerText = JSON.stringify(result.data[0].embedding, null, 4);
+        output.innerText = JSON.stringify(result.data[0].embedding).replace(/,/g, ', ');
         await wllama.exit();
       })();
     </script>

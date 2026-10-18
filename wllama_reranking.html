@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Reranking</title>
-    <link rel="icon" href="data:,">
+    <title>wllama reranking</title>
   </head>
   <body>
+    <h2>Alibaba Qwen3 Reranker 4B Q4_K_M (2.3 GB)</h2>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
@@ -25,7 +25,7 @@
           "Lyon is not the capital of France.", "Marseille is a big city of France"
         ];
         const result = await wllama.createRerank({ query: query, documents: documents});
-        output.innerText = JSON.stringify([query, documents], null, 4) + "\n" + JSON.stringify(result, null, 4);
+        output.innerText = JSON.stringify([query, documents], null, 4) + "\n" + JSON.stringify(result.results, null, 4);
         await wllama.exit();
       })();
     </script>

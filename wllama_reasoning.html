@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Text Qwen3.5 0.8B</title>
-    <link rel="icon" href="data:,">
+    <title>wllama reasoning</title>
     <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; }</style>
   </head>
   <body>
+    <h2>Alibaba Qwen3.5 0.8B Q4_0 (0.5 GB)</h2>
+    <div>Prompt: Write a quick sort algorithm in JavaScript, only the code.</div>
     <pre id="progress"></pre>
     <pre id="reasoning"></pre>
     <pre id="output"></pre>
@@ -22,9 +23,9 @@
         });
         progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
-          messages: [{ role: "user", content: "Write a quick sort algorithm in php 8, only the code." }],
+          messages: [{ role: "user", content: "Write a quick sort algorithm in JavaScript, only the code." }],
           chat_template_kwargs: {enable_thinking: true, preserve_thinking: false},
-          temperature: 0.7, min_p: 0.0, top_p: 0.8, top_k: 20, penalty_repeat: 1.0,
+          temperature: 0.7, min_p: 0.0, top_p: 0.8, top_k: 20, repeat_penalty: 1.0,
           max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {

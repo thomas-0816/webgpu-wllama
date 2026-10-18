@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>wllama Bonsai 4B</title>
-    <link rel="icon" href="data:,">
+    <title>wllama bonsai</title>
     <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; }</style>
   </head>
   <body>
+    <h2>PrismML Bonsai 1.7B Q1_0 (0.2 GB)</h2>
+    <div>Prompt: What is the minimal multiple condition coverage?</div>
     <pre id="progress"></pre>
     <pre id="reasoning"></pre>
     <pre id="output"></pre>
@@ -22,8 +23,8 @@
         });
         progress.innerText = "loaded.";
         const response = await wllama.createChatCompletion({
-          messages: [{ role: "user", content: "Was ist die minimale Mehrfach-Bedingungsabdeckung?" }],
-          temperature: 0.5, min_p: 0.0, top_p: 0.9, top_k: 20, penalty_repeat: 1.0,
+          messages: [{ role: "user", content: "What is the minimal multiple condition coverage?" }],
+          temperature: 0.5, min_p: 0.0, top_p: 0.9, top_k: 20, repeat_penalty: 1.0,
           max_tokens: 1024, stream: true, timings_per_token: true
         });
         for await (const chunk of response) {

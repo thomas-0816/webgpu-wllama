@@ -48,6 +48,11 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
 
     wget https://huggingface.co/LiquidAI/LFM2.5-24B-A2B-GGUF/resolve/main/LFM2.5-24B-A2B-Q4_K_M.gguf
 
+    wget https://huggingface.co/ggml-org/Laya-GGUF/resolve/main/Laya-Q8_0.gguf
+    wget https://huggingface.co/ggml-org/Kev-4B-GGUF/resolve/main/Kev-4B-Q4_K_M.gguf
+    wget https://huggingface.co/ggml-org/lev-GGUF/resolve/main/lev-Q4_K_M.gguf
+    wget https://huggingface.co/ggml-org/Clef-Flash-GGUF/resolve/main/Clef-Flash-Q4_K_M.gguf
+
 ## nginx
 
     add_header Cross-Origin-Embedder-Policy "require-corp";
@@ -83,3 +88,14 @@ Launch your web browser:
 - https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF
 - https://huggingface.co/unsloth/Qwen3-30B-A3B-GGUF
 - https://huggingface.co/LiquidAI/LFM2-24B-A2B-GGUF
+
+## development
+
+    git clone --depth=1 --branch=master --recurse-submodules --shallow-submodules https://github.com/ngxson/wllama.git
+    cd wllama
+    npm ci
+    npm run build:glue
+    npm run build:worker
+    npm run build:wasm
+    npm run build:tsup
+    npm run build:minified

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama decision</title>
+    <style>pre { white-space: pre-wrap; width: 50vw; }</style>
+  </head>
+  <body>
+    <h2>Kev 4B (2.9 GB)</h2>
+    <div>Prompt: package arrived nine days after promised date, box was torn open. Item works fine, I want the delivery fee back.</div>
+    <pre>
+    topic:
+      type: choice, instructions: What is the main topic of this message?
+      criteria:
+        delivery: Late, lost or damaged deliveries
+        product: Defects or problems with the item itself
+        account: Login, password or profile settings
+    mood:
+      type: score, instructions: How satisfied is the writer?
+      criteria: [ very unhappy, unhappy, neutral, happy ]
+    refund:
+      type: noul, instructions: Does the writer ask for money back?</pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl("./models/Kev-4B-Q4_K_M.gguf", {
+          n_ctx: 2048, n_batch: 1024, n_ubatch: 1024, n_gpu_layers: 9999, reasoning: false,
+          progressCallback: ({ loaded, total }) => output.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        output.innerText = "loaded.";
+        const questions = {
+          topic: {
+            type: 'choice', instructions: 'What is the main topic of this message?',
+            criteria: {
+              delivery: 'Late, lost or damaged deliveries',
+              product: 'Defects or problems with the item itself',
+              account: 'Login, password or profile settings'}},
+          mood: {
+            type: 'score', instructions: 'How satisfied is the writer?',
+            criteria: ['very unhappy', 'unhappy', 'neutral', 'happy']},
+          refund: {
+            type: 'noul', instructions: 'Does the writer ask for money back?'}};
+        const response = await wllama.createSystemOne({
+          state: "Package arrived nine days after promised date, box was torn open. Item works fine, I would like delivery fee back.",
+          questions: questions
+        });
+        output.innerText = JSON.stringify(response.answers ?? "", null, 4);
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>

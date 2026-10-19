@@ -11,9 +11,9 @@
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
-      import { Wllama } from "./wllama/esm/index.min.js";
+      import { Wllama } from "./wllama/esm/index.min.js"; // see https://github.com/ngxson/wllama/issues/294
       (async () => {
-        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" });
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({

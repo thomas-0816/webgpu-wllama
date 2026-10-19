@@ -5,14 +5,14 @@
     <style>pre { white-space: collapse; word-break: break-all; }</style>
   </head>
   <body>
-    <h2>Google embeddinggemma 2 BF16 (0.5 GB)</h2>
+    <h2>Google EmbeddingGemma2 BF16 (0.5 GB)</h2>
     <div>Prompt: When was Beethoven born?</div>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
       import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
       (async () => {
-        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" }); // requires latest llama.cpp
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl("./models/embeddinggemma-2-BF16.gguf", {
@@ -22,7 +22,7 @@
         });
         progress.innerText = "loaded.";
         const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"] });
-        output.innerText = JSON.stringify(result.data[0].embedding, null, 4);
+        output.innerText = JSON.stringify(result.data[0].embedding).replace(/,/g, ', ');
         await wllama.exit();
       })();
     </script>

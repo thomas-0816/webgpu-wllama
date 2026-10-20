@@ -10,19 +10,20 @@
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
-      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      import { Wllama } from "./wllama/esm/index.min.js";
       (async () => {
-        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const wllama = new Wllama({ default: "./wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({
           url: "./models/LightOnOCR-2-1B-Q4_K_M.gguf", mmprojUrl: "./models/mmproj-LightOnOCR-2-1B-Q8_0.gguf"
         }, {
-          n_ctx: 65536, n_gpu_layers: 9999, reasoning: false,
+          n_ctx: 16384, n_gpu_layers: 9999, reasoning: false,
+          image_max_tokens: 250,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";
-        const response = await wllama.createChatCompletion({ // currently crashing
+        const response = await wllama.createChatCompletion({
           messages: [{role: "user", content: [
             { type: "image", data: await fetch("./demo_ocr.jpeg").then(r => r.arrayBuffer()) }]}],
           temperature: 0.2, top_p: 0.9, top_k: 0,

@@ -27,6 +27,7 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/ggml-org/Qwen3-ASR-1.7B-GGUF/resolve/main/mmproj-Qwen3-ASR-1.7B-Q8_0.gguf
 
     wget https://huggingface.co/unsloth/embeddinggemma-2-GGUF/resolve/main/embeddinggemma-2-BF16.gguf
+    wget -O embeddinggemma-2-mmproj-BF16.gguf https://huggingface.co/unsloth/embeddinggemma-2-GGUF/resolve/main/mmproj-BF16.gguf
     wget https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe-GGUF/resolve/main/nomic-embed-text-v2-moe.Q4_K_M.gguf
     wget https://huggingface.co/MesTruck/STS-multilingual-mpnet-base-v2-GGUF/resolve/main/sts-multilingual-mpnet-base-v2.Q4_K_M.gguf
     wget https://huggingface.co/Voodisss/Qwen3-Reranker-4B-GGUF-llama_cpp/resolve/main/Qwen3-Reranker-4B-Q4_K_M.gguf

@@ -6,8 +6,8 @@
   </head>
   <body>
     <h2>Google EmbeddingGemma2 BF16 (0.5 GB)</h2>
-    <img src="./marge.png">
-    <div>Image: marge.png</div>
+    <img src="./marge.jpg">
+    <div>Image: marge.jpg</div>
     <pre id="progress"></pre>
     <pre id="output"></pre>
     <script type="module">
@@ -55,7 +55,7 @@
 
         const imageEmbedding = (await wllama.createEmbedding({
           input: [
-            { type: "image", data: await fetch("./marge.png").then((r) => r.arrayBuffer()) },
+            { type: "image", data: await fetch("./marge.jpg").then((r) => r.arrayBuffer()) },
             { type: "text", text: "title: none | text: a simpsons character" },
           ],
           embd_normalize: -1,
@@ -65,15 +65,15 @@
 
         cosine = similarity_cosine(queryEmbedding.data[0].embedding, imageEmbedding);
         euclide = similarity_euclide(queryEmbedding.data[0].embedding, imageEmbedding);
-        output.innerText += `homer vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+        output.innerText += `homer vs marge.jpg: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
 
         cosine = similarity_cosine(queryEmbedding.data[1].embedding, imageEmbedding);
         euclide = similarity_euclide(queryEmbedding.data[1].embedding, imageEmbedding);
-        output.innerText += `marge vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+        output.innerText += `marge vs marge.jpg: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
 
         cosine = similarity_cosine(queryEmbedding.data[2].embedding, imageEmbedding);
         euclide = similarity_euclide(queryEmbedding.data[2].embedding, imageEmbedding);
-        output.innerText += `bart vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+        output.innerText += `bart vs marge.jpg: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
 
         await wllama.exit();
       })();

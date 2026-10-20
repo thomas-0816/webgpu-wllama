@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama embeddings</title>
+    <style>pre { white-space: collapse; word-break: break-all; }</style>
+  </head>
+  <body>
+    <h2>Google EmbeddingGemma2 BF16 (0.5 GB)</h2>
+    <img src="./marge.png">
+    <div>Image: marge.png</div>
+    <pre id="progress"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      const similarity_cosine = (a, b) => {
+        let dot = 0;
+        let na = 0;
+        let nb = 0;
+        for (let i = 0; i < a.length; i++) {
+          dot += a[i] * b[i];
+          na += a[i] * a[i];
+          nb += b[i] * b[i];
+        }
+        if (na === 0 || nb === 0) {
+          return 0;
+        }
+        return dot / (Math.sqrt(na) * Math.sqrt(nb));
+      };
+      const similarity_euclide = (a, b) => {
+        let sum = 0;
+        for (let i = 0; i < a.length; i++) {
+          const d = a[i] - b[i];
+          sum += d * d;
+        }
+        return Math.sqrt(sum);
+      };
+
+      import { Wllama } from "./wllama/esm/index.min.js"; // requires patched wllama
+      (async () => {
+        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" }); // requires latest llama.cpp
+        const progress = document.getElementById("progress");
+        const output = document.getElementById("output");
+        await wllama.loadModelFromUrl({
+          url: "./models/embeddinggemma-2-BF16.gguf", mmprojUrl: "./models/embeddinggemma-2-mmproj-BF16.gguf"
+        }, {
+          embeddings: true, n_gpu_layers: 9999, pooling_type: "mean",
+          n_ctx: 2048, n_batch: 2048, n_ubatch: 2048,
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        progress.innerText = "loaded.";
+        const queryEmbedding = await wllama.createEmbedding({ input: [
+          "task: search result | query: homer",
+          "task: search result | query: marge",
+          "task: search result | query: bart"
+        ], embd_normalize: -1 });
+
+        const imageEmbedding = (await wllama.createEmbedding({
+          input: [
+            { type: "image", data: await fetch("./marge.png").then((r) => r.arrayBuffer()) },
+            { type: "text", text: "title: none | text: a simpsons character" },
+          ],
+          embd_normalize: -1,
+        })).data[0].embedding;
+
+        let cosine, euclide;
+
+        cosine = similarity_cosine(queryEmbedding.data[0].embedding, imageEmbedding);
+        euclide = similarity_euclide(queryEmbedding.data[0].embedding, imageEmbedding);
+        output.innerText += `homer vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+
+        cosine = similarity_cosine(queryEmbedding.data[1].embedding, imageEmbedding);
+        euclide = similarity_euclide(queryEmbedding.data[1].embedding, imageEmbedding);
+        output.innerText += `marge vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+
+        cosine = similarity_cosine(queryEmbedding.data[2].embedding, imageEmbedding);
+        euclide = similarity_euclide(queryEmbedding.data[2].embedding, imageEmbedding);
+        output.innerText += `bart vs marge.png: cosine=${cosine.toFixed(6)} euclide=${euclide.toFixed(6)}\n`;
+
+        await wllama.exit();
+      })();
+    </script>
+  </body>
+</html>

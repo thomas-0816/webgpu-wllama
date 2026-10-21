@@ -19,7 +19,6 @@
           url: "./models/LightOnOCR-2-1B-Q4_K_M.gguf", mmprojUrl: "./models/mmproj-LightOnOCR-2-1B-Q8_0.gguf"
         }, {
           n_ctx: 16384, n_gpu_layers: 9999, reasoning: false,
-          image_max_tokens: 250,
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";

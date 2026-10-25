@@ -21,7 +21,7 @@
           progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
         });
         progress.innerText = "loaded.";
-        const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"] });
+        const result = await wllama.createEmbedding({ input: ["When was Beethoven born?"], embd_normalize: -1 });
         output.innerText = JSON.stringify(result.data[0].embedding).replace(/,/g, ', ');
         await wllama.exit();
       })();

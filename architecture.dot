@@ -90,19 +90,20 @@ digraph wllama {
       ASYNC [label="Async runtime\nJSPI or Asyncify"];
       OPFS [label="OPFS / Cross-Origin Storage"];
     }
-    subgraph cluster_webserver {
-      label="Webserver / CDN";
-      fontsize=13;
-      color="#9CA3AF";
-      style="rounded,dashed";
-      penwidth=1.2;
+  }
 
-      MODELHOST [
-        label="HTTP(S) GGUF downloads",
-        fillcolor="#F3F4F6",
-        color="#6B7280"
-      ];
-    }
+  subgraph cluster_webserver {
+    label="Webserver / CDN";
+    fontsize=13;
+    color="#9CA3AF";
+    style="rounded,dashed";
+    penwidth=1.2;
+
+    MODELHOST [
+      label="HTTP(S) GGUF downloads",
+      fillcolor="#F3F4F6",
+      color="#6B7280"
+    ];
   }
 
   UI -> WAPI;

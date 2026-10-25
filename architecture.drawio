@@ -1,0 +1,145 @@
+<mxfile host="Electron">
+  <diagram name="wllama architecture" id="wllama-main">
+    <mxGraphModel dx="2029" dy="1197" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1980" pageHeight="1110" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="browser" parent="1" style="rounded=1;arcSize=3;dashed=1;dashPattern=8 4;strokeColor=#9CA3AF;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#111827;align=center;verticalAlign=top;spacingTop=8;" value="Web Browser" vertex="1">
+          <mxGeometry height="990" width="1410" x="540" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="webserver" parent="1" style="rounded=1;dashed=1;dashPattern=8 4;strokeColor=#9CA3AF;fillColor=none;fontFamily=Helvetica;fontSize=13;fontColor=#111827;align=center;verticalAlign=top;spacingTop=8;" value="Webserver / CDN" vertex="1">
+          <mxGeometry height="160" width="300" x="210" y="370.5" as="geometry" />
+        </mxCell>
+        <mxCell id="app_cluster" parent="1" style="rounded=1;strokeColor=#D1D5DB;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=top;spacingTop=4;" value="Application" vertex="1">
+          <mxGeometry height="110" width="420" x="820" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="api_cluster" parent="1" style="rounded=1;arcSize=5;strokeColor=#D1D5DB;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=top;spacingTop=4;" value="wllama API layer" vertex="1">
+          <mxGeometry height="310" width="860" x="560" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="worker_cluster" parent="1" style="rounded=1;strokeColor=#D1D5DB;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=top;spacingTop=4;" value="Internal Web Worker" vertex="1">
+          <mxGeometry height="100" width="360" x="1170" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="wasm_cluster" parent="1" style="rounded=1;arcSize=5;strokeColor=#D1D5DB;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=top;spacingTop=4;" value="wllama.wasm" vertex="1">
+          <mxGeometry height="240" width="670" x="1170" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="platform_cluster" parent="1" style="rounded=1;strokeColor=#D1D5DB;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=top;spacingTop=4;" value="Browser platform" vertex="1">
+          <mxGeometry height="80" width="1250" x="635" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="ui" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Web Application" vertex="1">
+          <mxGeometry height="50" width="340" x="860" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="wapi" parent="1" style="rounded=1;fillColor=#FEE2E2;strokeColor=#F87171;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Wllama API&#xa;load, chat, completion, embeddings, streaming" vertex="1">
+          <mxGeometry height="70" width="340" x="860" y="215" as="geometry" />
+        </mxCell>
+        <mxCell id="mm" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Model manager&#xa;shards, downloads, validation" vertex="1">
+          <mxGeometry height="60" width="280" x="580" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="gluejs" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="GLUE protocol&#xa;typed binary codec" vertex="1">
+          <mxGeometry height="60" width="280" x="1120" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="cm" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Cache manager&#xa;metadata, integrity, storage policy" vertex="1">
+          <mxGeometry height="60" width="280" x="580" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="hf" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Hugging Face resolver&#xa;repo and file lookup" vertex="1">
+          <mxGeometry height="60" width="280" x="1120" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="px" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Main-thread orchestration&#xa;Worker orchestrator, task queue, buffers" vertex="1">
+          <mxGeometry height="60" width="300" x="1480" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="worker" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Worker runtime&#xa;module lifecycle, file bridge, WASM calls" vertex="1">
+          <mxGeometry height="50" width="280" x="1210" y="548" as="geometry" />
+        </mxCell>
+        <mxCell id="abi" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="C ABI&#xa;exports and action dispatch" vertex="1">
+          <mxGeometry height="50" width="300" x="1260" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="ctx" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Request context&#xa;readers, request IDs, cancellation" vertex="1">
+          <mxGeometry height="50" width="280" x="1380" y="745" as="geometry" />
+        </mxCell>
+        <mxCell id="gluecpp" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="GLUE protocol&#xa;message parse and serialize" vertex="1">
+          <mxGeometry height="50" width="170" x="1190" y="815" as="geometry" />
+        </mxCell>
+        <mxCell id="llama" parent="1" style="rounded=1;fillColor=#FEE2E2;strokeColor=#F87171;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="llama.cpp + ggml core&#xa;server queue, chat, sampling&#xa;inference, KV cache, multimodal" vertex="1">
+          <mxGeometry height="50" width="280" x="1540" y="815" as="geometry" />
+        </mxCell>
+        <mxCell id="opfs" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="OPFS / Cross-Origin Storage" vertex="1">
+          <mxGeometry height="40" width="300" x="670" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="async" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="Async runtime&#xa;JSPI or Asyncify" vertex="1">
+          <mxGeometry height="40" width="260" x="1010" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu" parent="1" style="rounded=1;fillColor=#FEE2E2;strokeColor=#F87171;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="WebGPU backend&#xa;ggml-webgpu" vertex="1">
+          <mxGeometry height="40" width="160" x="1484" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu" parent="1" style="rounded=1;fillColor=#EEF2FF;strokeColor=#6366F1;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="CPU backend&#xa;WASM SIMD + pthreads" vertex="1">
+          <mxGeometry height="40" width="200" x="1664" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="modelhost" parent="1" style="rounded=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontFamily=Helvetica;fontSize=10;fontColor=#111827;align=center;verticalAlign=middle;" value="HTTP(S) GGUF downloads" vertex="1">
+          <mxGeometry height="60" width="260" x="230" y="410.5" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ui_wapi" edge="1" parent="1" source="ui" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="wapi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_wapi_mm" edge="1" parent="1" source="wapi" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_wapi_gluejs" edge="1" parent="1" source="wapi" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="gluejs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mm_cm" edge="1" parent="1" source="mm" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mm_hf" edge="1" parent="1" source="mm" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" target="hf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gluejs_px" edge="1" parent="1" source="gluejs" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="px">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cm_opfs" edge="1" parent="1" source="cm" style="edgeStyle=none;rounded=0;dashed=1;dashPattern=6 4;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5667;entryY=0;entryDx=0;entryDy=0;" target="opfs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cm_modelhost" edge="1" parent="1" source="cm" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="modelhost">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_px_worker" edge="1" parent="1" source="px" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" target="worker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_worker_abi" edge="1" parent="1" source="worker" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" target="abi">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_worker_async" edge="1" parent="1" source="worker" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="async">
+          <mxGeometry relative="1" x="0.0343" as="geometry" />
+        </mxCell>
+        <mxCell id="e_abi_gluecpp" edge="1" parent="1" source="abi" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" target="gluecpp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_abi_ctx" edge="1" parent="1" source="abi" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" target="ctx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ctx_gluecpp" edge="1" parent="1" source="ctx" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" target="gluecpp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ctx_llama" edge="1" parent="1" source="ctx" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" target="llama">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_llama_gpu" edge="1" parent="1" source="llama" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" target="gpu">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_llama_cpu" edge="1" parent="1" source="llama" style="edgeStyle=none;rounded=0;strokeColor=#475569;strokeWidth=1;endArrow=block;endFill=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="cpu">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_download" parent="1" style="text;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=8.5;fontColor=#111827;align=center;verticalAlign=middle;" value="Download" vertex="1">
+          <mxGeometry height="15" width="55" x="520" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_cache" parent="1" style="text;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=8.5;fontColor=#111827;align=center;verticalAlign=middle;" value="Cache" vertex="1">
+          <mxGeometry height="15" width="55" x="728" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_actions" parent="1" style="text;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=8.5;fontColor=#111827;align=center;verticalAlign=middle;" value="Actions" vertex="1">
+          <mxGeometry height="15" width="55" x="1450" y="375" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_postmessage" parent="1" style="text;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=8.5;fontColor=#111827;align=center;verticalAlign=middle;" value="PostMessage" vertex="1">
+          <mxGeometry height="15" width="85" x="1558" y="509" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

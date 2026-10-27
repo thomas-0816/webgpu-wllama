@@ -37,7 +37,7 @@ Uses wllama, WebGPU and llama.cpp for in-browser inference.
     wget https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-UD-Q4_K_XL.gguf
     wget -O Qwen3.5-2B-mmproj-BF16.gguf https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/mmproj-BF16.gguf
 
-    wget https://huggingface.co/unsloth/gemma-4-E2B-it-qat-mobile-GGUF/resolve/main/gemma-4-E2B-it-qat-UD-Q2_K_XL.gguf
+    wget https://huggingface.co/unsloth/gemma-4-E2B-it-qat-GGUF/resolve/main/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf
     wget -O gemma-4-E2B-mmproj-BF16.gguf https://huggingface.co/unsloth/gemma-4-E2B-it-qat-GGUF/resolve/main/mmproj-BF16.gguf
 
     wget https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf
@@ -77,7 +77,7 @@ Launch your web browser:
 - https://huggingface.co/prism-ml/Bonsai-1.7B-gguf
 - https://huggingface.co/prism-ml/Bonsai-4B-gguf
 - https://huggingface.co/prism-ml/Bonsai-8B-gguf
-- https://huggingface.co/tencent/HY-MT1.5-1.8B-GGUF
+- https://huggingface.co/tencent/HY-MT2-1.8B-GGUF
 - https://huggingface.co/zai-org/GLM-OCR
 - https://huggingface.co/lightonai/LightOnOCR-2-1B
 - https://huggingface.co/Qwen/Qwen3-ASR-1.7B

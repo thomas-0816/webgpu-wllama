@@ -15,10 +15,10 @@
     <pre id="reasoning"></pre>
     <pre id="output"></pre>
     <script type="module">
-      import { Wllama } from "./wllama/esm/index.min.js";
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
       import { prompt } from "./wllama_faq.js";
       (async () => {
-        const wllama = new Wllama({ default: "./wllama/esm/wasm/wllama.wasm" });
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
         const progress = document.getElementById("progress");
         const progress2 = document.getElementById("progress2");
         const reasoning = document.getElementById("reasoning");

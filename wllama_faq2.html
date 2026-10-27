@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>wllama Qwen 3.5 0.8B</title>
+    <style>pre { white-space: pre-wrap; width: 50vw; } #reasoning { font-style: italic; } #input { width: 50vw; } #progress, #progress2 { display: inline; }</style>
+  </head>
+  <body>
+    <div>
+      <pre id="progress"></pre>
+      <pre id="progress2"></pre>
+    </div>
+    <form id="form">
+      <input type="text" id="input" autofocus>
+    </form>
+    <pre id="reasoning"></pre>
+    <pre id="output"></pre>
+    <script type="module">
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
+      import { prompt } from "./wllama_faq.js";
+      (async () => {
+        const wllama = new Wllama({ default: "./node_modules/@wllama/wllama/esm/wasm/wllama.wasm" });
+        const progress = document.getElementById("progress");
+        const progress2 = document.getElementById("progress2");
+        const reasoning = document.getElementById("reasoning");
+        const input = document.getElementById("input");
+        const output = document.getElementById("output");
+        const form = document.getElementById("form");
+        await wllama.loadModelFromUrl("./models/Qwen3.5-0.8B-Q4_0.gguf", {
+          n_ctx: 4096, n_gpu_layers: 9999, reasoning: false, warmup: false, cache_type_k: 'q8_0', cache_type_v: 'q8_0',
+          progressCallback: ({ loaded, total }) => progress.innerText = Math.round((loaded / total) * 100) + "%"
+        });
+        const warmup = await wllama.createChatCompletion({
+          messages: [{ role: "user", content: prompt('') }],
+          temperature: 0.7, min_p: 0.0, top_p: 0.8, top_k: 20, repeat_penalty: 1.0,
+          max_tokens: 1024, stream: true, timings_per_token: true, return_progress: true
+        });
+        for await (const chunk of warmup) {
+          progress.innerText = Math.round(chunk.timings?.prompt_per_second) + " pp-t/s"
+          if (chunk.prompt_progress) {
+            const ratio = chunk.prompt_progress.processed / chunk.prompt_progress.total;
+            progress2.innerText = ratio < 1 ? "Prompt " + Math.round(ratio * 100) + "%" : "";
+          }
+        }
+        console.log('Warmup finished.');
+        form.onsubmit = async (event) => {
+          event.preventDefault();
+          reasoning.innerText = '';
+          output.innerText = '';
+          const response = await wllama.createChatCompletion({
+            messages: [{ role: "user", content: prompt(input.value) }],
+            temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64,
+            max_tokens: 1024, stream: true, timings_per_token: true, return_progress: true
+          });
+          for await (const chunk of response) {
+            reasoning.innerText += chunk.choices[0].delta.reasoning_content ?? "";
+            output.innerText += chunk.choices[0].delta.content ?? "";
+            progress.innerText = chunk.timings?.predicted_per_second.toFixed(2) + " t/s";
+            if (chunk.prompt_progress) {
+              const ratio = chunk.prompt_progress.processed / chunk.prompt_progress.total;
+              progress2.innerText = ratio < 1 ? "Prompt " + Math.round(ratio * 100) + "%" : "";
+            }
+          }
+        };
+      })();
+    </script>
+  </body>
+</html>

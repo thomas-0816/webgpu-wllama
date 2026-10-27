@@ -34,9 +34,9 @@
         return Math.sqrt(sum);
       };
 
-      import { Wllama } from "./wllama/esm/index.min.js"; // requires patched wllama
+      import { Wllama } from "./node_modules/@wllama/wllama/esm/index.min.js";
       (async () => {
-        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" }); // requires latest llama.cpp
+        const wllama = new Wllama({ default: "./wllama/build/wllama.wasm" }); // requires newer llama.cpp
         const progress = document.getElementById("progress");
         const output = document.getElementById("output");
         await wllama.loadModelFromUrl({

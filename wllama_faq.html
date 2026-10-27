@@ -35,7 +35,6 @@
           max_tokens: 1024, stream: true, timings_per_token: true, return_progress: true
         });
         for await (const chunk of warmup) {
-          console.log(chunk);
           progress.innerText = Math.round(chunk.timings?.prompt_per_second) + " pp-t/s"
           if (chunk.prompt_progress) {
             const ratio = chunk.prompt_progress.processed / chunk.prompt_progress.total;
@@ -47,7 +46,6 @@
           event.preventDefault();
           reasoning.innerText = '';
           output.innerText = '';
-          console.log(input.value);
           const response = await wllama.createChatCompletion({
             messages: [{ role: "user", content: prompt(input.value) }],
             temperature: 1.0, min_p: 0.0, top_p: 0.95, top_k: 64,
